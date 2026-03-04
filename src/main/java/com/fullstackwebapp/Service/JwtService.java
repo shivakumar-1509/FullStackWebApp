@@ -1,18 +1,19 @@
 package com.fullstackwebapp.Service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.Map;
 
-public class jwtService {
+@Service
+public class JwtService {
 
-    private final String secretKey;
+    public  String secretKey;
 
-    public jwtService(String secretKey) {
-        this.secretKey = secretKey;
-    }
 
     public String generateSecretKey(){
         try{
@@ -25,7 +26,5 @@ public class jwtService {
         }
     }
 
-    public String generateToken(String username){
-        Map<String>
-    }
+
 }

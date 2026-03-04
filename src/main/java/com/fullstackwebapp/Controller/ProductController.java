@@ -49,13 +49,17 @@ public class ProductController {
         return new ResponseEntity<>("Product updated successfully", HttpStatus.OK);
     }
 
-    public ResponseEntity<?> Login(@RequestBody Login login){
+    public ResponseEntity<?> Login(@RequestBody Login login) {
 
 
     }
 
-    public ResponseEntity<?> Register(@RequestBody User user){
+    public ResponseEntity<?> Register(@RequestBody User user) {
+
 
     }
+
+
+
 
 }
