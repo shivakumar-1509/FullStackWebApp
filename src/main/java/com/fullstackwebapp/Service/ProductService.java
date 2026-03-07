@@ -22,6 +22,8 @@ public class ProductService {
     public ProductRepository repository;
     public UserRepo userRepo;
 
+    private final BCryptPasswordEncoder  passwordEncoder = new BCryptPasswordEncoder(10);
+
     @Autowired
     public ProductService( UserRepo userRepo) {
         this.userRepo = userRepo;
@@ -110,8 +112,10 @@ public class ProductService {
         repository.save(product);
     }
 
-    BCryptPasswordEncoder  passwordEncoder = new BCryptPasswordEncoder();
+
     public void register(User user) {
+        user.setFirstName(user.getFirstName());
+        user.setLastName(user.getLastName());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole(user.getRole());
         user.setUsername(user.getUsername());
