@@ -1,10 +1,8 @@
 package com.fullstackwebapp.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+import org.antlr.v4.runtime.misc.NotNull;
 
 
 @Data
@@ -18,12 +16,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String firstName;
+    @Column(nullable = false)
     private String lastName;
+    @Column(nullable = false)
     private String email;
 
+    @Column(unique = true,nullable = false)
     private String username;
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private Role role;
 }
