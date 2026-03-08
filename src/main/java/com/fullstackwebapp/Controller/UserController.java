@@ -14,9 +14,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/user/")
 public class UserController {
 
     private final UserDetailService service;
@@ -30,19 +32,18 @@ public class UserController {
         this.jwtService = jwtService;
     }
 
-    @PostMapping
-    public ResponseEntity<?> RegisterUser(@RequestBody User user){
+    @PostMapping("register")
+    public ResponseEntity<String> RegisterUser(@RequestBody User user){
         if(user == null){
             return new ResponseEntity<>("Enter the valid details",HttpStatus.BAD_REQUEST);
         }
         else {
-            service.register(user);
-            return new ResponseEntity<>("user registered successfully",HttpStatus.OK);
+            return new ResponseEntity<>(service.register(user),HttpStatus.OK);
         }
     }
 
-    @PostMapping("/user/login")
-    public ResponseEntity<?> login(Login login){
+    @PostMapping("login")
+    public ResponseEntity<?> login(@RequestBody Login login){
         if(login == null){
             return new ResponseEntity<>("Invalid Credentials", HttpStatus.NOT_ACCEPTABLE);
         }

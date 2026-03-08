@@ -25,8 +25,9 @@ public class ProductService {
 
 
     @Autowired
-    public ProductService( UserRepo userRepo) {
+    public ProductService( UserRepo userRepo,ProductRepository repository) {
         this.userRepo = userRepo;
+        this.repository = repository;
     }
 
 
@@ -60,6 +61,7 @@ public class ProductService {
         User user = getInfo();
 
         product.setCreatedBy(user);
+        product.setProductDate(new Date());
 
         repository.save(product);
     }

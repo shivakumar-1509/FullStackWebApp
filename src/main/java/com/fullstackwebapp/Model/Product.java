@@ -21,11 +21,11 @@ public class Product {
 
     private String ProductName;
     private BigDecimal ProductPrice;
-    private int ProductQuantity;
+    private Integer ProductQuantity;
     private String ProductCategory;
     private String ProductDescription;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-mm-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy")
     private Date ProductDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
