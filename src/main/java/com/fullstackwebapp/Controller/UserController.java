@@ -2,9 +2,7 @@ package com.fullstackwebapp.Controller;
 
 import com.fullstackwebapp.DTO.Login;
 import com.fullstackwebapp.Model.User;
-import com.fullstackwebapp.Repository.UserRepo;
 import com.fullstackwebapp.Service.JwtService;
-import com.fullstackwebapp.Service.ProductService;
 import com.fullstackwebapp.Service.UserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

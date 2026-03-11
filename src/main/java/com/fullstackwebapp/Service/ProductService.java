@@ -111,7 +111,16 @@ public class ProductService {
         repository.save(product);
     }
 
+    public String deleteProduct(Long id) {
+        if(repository.findById(id).isPresent()){
+            repository.deleteById(id);
+            return "product deleted";
+        }
+        else return "product not found";
+    }
 
-
+    public List<Product> findProductByUser(){
+        return repository.findProductByCreatedBy(getInfo().getId());
+    }
 
 }

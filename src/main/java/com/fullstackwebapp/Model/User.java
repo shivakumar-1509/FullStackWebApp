@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
+import java.util.List;
+
 
 @Data
 @AllArgsConstructor
@@ -30,4 +32,7 @@ public class User {
 
     @Column(nullable = false)
     private Role role;
+
+    @OneToMany(mappedBy = "CreatedBy")
+    private List<Product> products;
 }
