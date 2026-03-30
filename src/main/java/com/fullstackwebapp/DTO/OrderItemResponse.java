@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 
 public record OrderItemResponse(
-       int ProductName,
+       String ProductName,
        int Quantity,
        BigDecimal TotalPrice
 ) {

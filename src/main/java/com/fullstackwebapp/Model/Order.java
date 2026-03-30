@@ -19,7 +19,7 @@ public class Order {
     int id;
 
     @Column(unique = true)
-    Long orderId;
+    String orderId;
     String CostumerName;
     String EmailId;
     String Status;

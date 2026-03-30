@@ -1,9 +1,12 @@
 package com.fullstackwebapp.Service;
 
+import com.fullstackwebapp.DTO.Login;
 import com.fullstackwebapp.Model.User;
 import com.fullstackwebapp.Model.UserPrinciple;
 import com.fullstackwebapp.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,17 +24,17 @@ public class UserDetailService implements UserDetailsService {
     public UserDetailService(UserRepo userRepo) {
         this.userRepo = userRepo;
     }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepo.findByUsername(username);
 
-        if(user==null){
+        if (user == null) {
             System.out.println("User not found");
             throw new UsernameNotFoundException(username);
-        }
-        else{
+        } else {
             System.out.println(user.getUsername());
-        return new UserPrinciple(user);
+            return new UserPrinciple(user);
         }
     }
 
@@ -41,19 +44,25 @@ public class UserDetailService implements UserDetailsService {
         user.setLastName(user.getLastName());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole(user.getRole());
-        if(userRepo.findByUsername(user.getUsername())!=null){
+        if (userRepo.findByUsername(user.getUsername()) != null) {
             return "User already exists with this username try with other username";
-        }
-        else {
+        } else {
             user.setUsername(user.getUsername());
             userRepo.save(user);
             return "User registered successfully";
         }
     }
 
-    public String find(String username){
-        if(userRepo.findByUsername(username)!=null){
+    public String find(String username) {
+        if (userRepo.findByUsername(username) != null) {
             return "your username password incorrect";
-        }else return null;
+        } else return null;
     }
+
+    public User profile() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        return userRepo.findByUsername(auth.getName());
+    }
+
 }

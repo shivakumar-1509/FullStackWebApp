@@ -3,7 +3,7 @@ package com.fullstackwebapp.DTO;
 import com.fullstackwebapp.Model.Product;
 
 public record OrderItemRequest(
-        int ProductId,
+        Long ProductId,
         int Quantity
 ) {
 }

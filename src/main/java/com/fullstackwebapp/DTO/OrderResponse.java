@@ -4,12 +4,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 public record OrderResponse(
-        Long OrderId,
+        String OrderId,
         String CostumerName,
         String EmailId,
         String Status,
         LocalDate Date,
-        List<OrderItemRequest> OrderItemRequests
-
+        List<OrderItemResponse> OrderItemRequests
 ) {
 }

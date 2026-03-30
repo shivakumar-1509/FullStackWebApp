@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 public class ProductController {
 
