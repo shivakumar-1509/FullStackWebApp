@@ -22,14 +22,11 @@ public class ProductService {
     public ProductRepository repository;
     public UserRepo userRepo;
 
-
-
     @Autowired
     public ProductService( UserRepo userRepo,ProductRepository repository) {
         this.userRepo = userRepo;
         this.repository = repository;
     }
-
 
     public ProductService(ProductRepository repository) {
         this.repository = repository;
@@ -66,8 +63,6 @@ public class ProductService {
         repository.save(product);
     }
 
-
-
     public void updateProduct(Long id, UpdateRequest request) {
         User user = getInfo();
         Product product= repository.findById(id).orElseThrow(()->new NoSuchElementException("Product not found"));
@@ -91,7 +86,6 @@ public class ProductService {
         if(request.getProductCategory()!= null){
             product.setProductCategory(request.getProductCategory());
         }
-
         repository.save(product);
     }
 
