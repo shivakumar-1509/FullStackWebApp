@@ -6,6 +6,7 @@ import com.fullstackwebapp.Model.OrderItem;
 import com.fullstackwebapp.Model.Product;
 import com.fullstackwebapp.Repository.Orders;
 import com.fullstackwebapp.Repository.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,10 @@ public class OrderService {
         this.repo = repo;
     }
 
+    @Autowired
+    private NotificationService notificationService;
 
+    @Transactional
     public OrderResponse placeOrders(OrderRequest orderRequest, OrderItemRequest orderItemRequest) {
 
         Order order = new Order();
@@ -38,10 +42,15 @@ public class OrderService {
 
         List<OrderItem> orderItemList = new ArrayList<>();
         for(OrderItemRequest req : orderRequest.Items()){
-            Product product1 = repo.findById(orderItemRequest.ProductId())
+            Product product1 = repo.findById(req.ProductId())
                     .orElseThrow(() -> new RuntimeException("Product Not Available"));
             product1.setProductQuantity(product1.getProductQuantity() - req.Quantity());
             repo.save(product1);
+            notificationService.createNotification(
+                    product1.getCreatedBy().getId(),
+                    "New order received for product: " + product1.getProductName()
+            );
+
             OrderItem orderItem = new OrderItem();
             orderItem.setProductId(product1.getProductId());
             orderItem.setProduct(product1);
@@ -101,6 +110,8 @@ public class OrderService {
 
         return orderResponses;
     }
+
+
 }
 
 
