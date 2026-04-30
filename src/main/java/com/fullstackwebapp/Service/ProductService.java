@@ -54,9 +54,14 @@ public class ProductService {
                 || user.getRole()== Role.ADMIN;
     }
 
-    public void addProduct(Product product) {
+    public void addProduct(UpdateRequest request) {
         User user = getInfo();
-
+        Product product = new Product();
+        product.setProductQuantity(request.getProductQuantity());
+        product.setProductName(request.getProductName());
+        product.setProductPrice(request.getProductPrice());
+        product.setProductCategory(request.getProductCategory());
+        product.setProductDescription(request.getProductDescription());
         product.setCreatedBy(user);
         product.setProductDate(new Date());
 

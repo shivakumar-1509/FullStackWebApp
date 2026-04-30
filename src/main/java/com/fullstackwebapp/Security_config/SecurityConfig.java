@@ -37,11 +37,12 @@ public class SecurityConfig {
         http.csrf(customizer -> customizer.disable())
                 .authorizeHttpRequests(exchange -> exchange.requestMatchers("/user/register","/user/login","/home")
                         .permitAll().anyRequest().authenticated())
-                .httpBasic(Customizer.withDefaults())
+                // 👇 CHANGE IS HERE 👇
+                .httpBasic(customizer -> customizer.disable())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
-        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
 
         return http.build();
