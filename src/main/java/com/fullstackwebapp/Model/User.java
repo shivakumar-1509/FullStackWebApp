@@ -1,13 +1,12 @@
 package com.fullstackwebapp.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.List;
 
-
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -33,6 +32,7 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
-    @OneToMany(mappedBy = "CreatedBy")
+    @JsonIgnore
+    @OneToMany(mappedBy = "createdBy")
     private List<Product> products;
 }

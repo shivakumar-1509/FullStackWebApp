@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product,Long> {
-   List<Product> findProductByCreatedBy(Long userId);
+   List<Product> findProductByCreatedBy_Id(Long userId);
 }

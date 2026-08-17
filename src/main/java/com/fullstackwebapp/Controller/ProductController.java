@@ -12,7 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 
-@CrossOrigin(origins = "http://localhost:5173")
+
 @RestController
 public class ProductController {
 
@@ -28,12 +28,11 @@ public class ProductController {
         return new ResponseEntity<>(service.getProducts(), HttpStatus.OK);
     }
 
-    @PostMapping("/addProduct")
-    public ResponseEntity<?> addProduct(@RequestBody UpdateRequest request,
-                                        @RequestPart MultipartFile file) throws IOException {
+    @PostMapping(value = "/addProduct", consumes = "multipart/form-data")
+    public ResponseEntity<?> addProduct(@RequestPart("product") UpdateRequest request,
+                                        @RequestPart(value = "file", required = false) MultipartFile file) throws IOException {
 
         service.addProduct(request);
-//        service.addImage(product.getProductId(),file);
         return new ResponseEntity<>("Product added successfully", HttpStatus.OK);
     }
 
@@ -62,6 +61,7 @@ public class ProductController {
     @GetMapping("/user/products")
     public ResponseEntity<?> getProductByUser(){
         return new ResponseEntity<>(service.findProductByUser(),HttpStatus.OK);
+
     }
 
 }

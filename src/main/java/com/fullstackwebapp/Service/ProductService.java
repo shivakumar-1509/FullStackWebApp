@@ -119,7 +119,9 @@ public class ProductService {
     }
 
     public List<Product> findProductByUser(){
-        return repository.findProductByCreatedBy(getInfo().getId());
+        Long id = getInfo().getId();
+        System.out.println("user Id:   "+id);
+        return repository.findProductByCreatedBy_Id(id);
     }
 
 }

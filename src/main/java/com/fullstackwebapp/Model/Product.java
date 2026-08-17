@@ -10,7 +10,6 @@ import java.util.Date;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Getter
 @Setter
 public class Product {
@@ -29,8 +28,8 @@ public class Product {
     private Date ProductDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_by")
-    private User CreatedBy;
+    @JoinColumn(name = "Created_by")
+    private User createdBy;
 
     private String ImageName;
     private String ImageType;
